@@ -1,9 +1,9 @@
 import os
 import subprocess
-import random
 import json
 import gzip
 import shutil
+import secrets
 
 def randomStatementCoverage(testLines,cFilePath,outPutObjectPath,tcasFolderPath):
     maxPercentage=-1
@@ -13,7 +13,7 @@ def randomStatementCoverage(testLines,cFilePath,outPutObjectPath,tcasFolderPath)
         lines.append(line.replace("\n",""))
 
     while maxPercentage<=100 and len(lines)>0:
-        randomIndex=random.randint(0,len(lines)-1)
+        randomIndex=secrets.SystemRandom().randint(0,len(lines)-1)
         testLine=lines[randomIndex]
         res= lines.pop(randomIndex)
         command="cd "+tcasFolderPath+" ; " +outPutObjectPath+" "+testLine+"; gcov-11 "+cFilePath+" -m -j -b 2>&1 | tee "+tcasFolderPath+"/output.txt"
@@ -46,7 +46,7 @@ def randomBranchCoverage(testLines,cFilePath,outPutObjectPath,tcasFolderPath):
         lines.append(line.replace("\n",""))
 
     while len(lines)>0:
-        randomIndex=random.randint(0,len(lines)-1)
+        randomIndex=secrets.SystemRandom().randint(0,len(lines)-1)
         testLine=lines[randomIndex]
         res= lines.pop(randomIndex)
         command="cd "+tcasFolderPath+" ; " +outPutObjectPath+" "+testLine+"; gcov-11 "+cFilePath+" -m -j -b 2>&1 | tee "+tcasFolderPath+"/output.txt"
