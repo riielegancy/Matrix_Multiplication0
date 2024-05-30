@@ -17,7 +17,7 @@ def randomStatementCoverage(testLines,cFilePath,outPutObjectPath,tcasFolderPath)
         testLine=lines[randomIndex]
         res= lines.pop(randomIndex)
         command="cd "+tcasFolderPath+" ; " +outPutObjectPath+" "+testLine+"; gcov-11 "+cFilePath+" -m -j -b 2>&1 | tee "+tcasFolderPath+"/output.txt"
-        process=subprocess.call(command,shell=True)
+        process=subprocess.call(command,shell=False)
         coverageLines=[]
 
         with open(tcasFolderPath+"/output.txt", "r") as f:
@@ -50,7 +50,7 @@ def randomBranchCoverage(testLines,cFilePath,outPutObjectPath,tcasFolderPath):
         testLine=lines[randomIndex]
         res= lines.pop(randomIndex)
         command="cd "+tcasFolderPath+" ; " +outPutObjectPath+" "+testLine+"; gcov-11 "+cFilePath+" -m -j -b 2>&1 | tee "+tcasFolderPath+"/output.txt"
-        process=subprocess.call(command,shell=True)
+        process=subprocess.call(command,shell=False)
         coverageLines=[]
 
         with open(tcasFolderPath+"/output.txt", "r") as f:
@@ -82,7 +82,7 @@ def totalStatementCoverage(testLines,cFilePath,outPutObjectPath,tcasFolderPath, 
         testLine=lines[0]
         res= lines.pop(0)
         command="cd "+tcasFolderPath+" ; " +outPutObjectPath+" "+testLine+"; gcov-11 "+cFilePath+" -m -j -b 2>&1 | tee "+tcasFolderPath+"/output.txt"
-        process=subprocess.call(command,shell=True)
+        process=subprocess.call(command,shell=False)
         coverageLines=[]
 
         with open(tcasFolderPath+"/output.txt", "r") as f:
@@ -104,7 +104,7 @@ def totalStatementCoverage(testLines,cFilePath,outPutObjectPath,tcasFolderPath, 
         #delete the gcda path in each iteration
         gcdapath=os.path.join(tcasFolderPath, processName+".gcda")
         command = "rm " + gcdapath
-        process = subprocess.Popen(command, shell=True)
+        process = subprocess.Popen(command, shell=False)
         process.wait()
 
     sortedTestSuit = dict(sorted(testSuit.items(), key=lambda item: item[1],reverse=True))
@@ -117,7 +117,7 @@ def totalStatementCoverage(testLines,cFilePath,outPutObjectPath,tcasFolderPath, 
         sortedTestSuit.pop(testLine)
 
         command="cd "+tcasFolderPath+" ; " +outPutObjectPath+" "+testLine+"; gcov-11 "+cFilePath+" -m -j -b 2>&1 | tee "+tcasFolderPath+"/output.txt"
-        process=subprocess.call(command,shell=True)
+        process=subprocess.call(command,shell=False)
         coverageLines=[]
 
         with open(tcasFolderPath+"/output.txt", "r") as f:
@@ -149,7 +149,7 @@ def totalBranchCoverage(testLines,cFilePath,outPutObjectPath,tcasFolderPath,proc
         testLine=lines[0]
         res= lines.pop(0)
         command="cd "+tcasFolderPath+" ; " +outPutObjectPath+" "+testLine+"; gcov-11 "+cFilePath+" -m -j -b 2>&1 | tee "+tcasFolderPath+"/output.txt"
-        process=subprocess.call(command,shell=True)
+        process=subprocess.call(command,shell=False)
         coverageLines=[]
 
         with open(tcasFolderPath+"/output.txt", "r") as f:
@@ -171,7 +171,7 @@ def totalBranchCoverage(testLines,cFilePath,outPutObjectPath,tcasFolderPath,proc
         #delete the gcda path in each iteration
         gcdapath=os.path.join(tcasFolderPath, processName+".gcda")
         command = "rm " + gcdapath
-        process = subprocess.Popen(command, shell=True)
+        process = subprocess.Popen(command, shell=False)
         process.wait()
 
     sortedTestSuit = dict(sorted(testSuit.items(), key=lambda item: item[1],reverse=True))
@@ -184,7 +184,7 @@ def totalBranchCoverage(testLines,cFilePath,outPutObjectPath,tcasFolderPath,proc
         sortedTestSuit.pop(testLine)
 
         command="cd "+tcasFolderPath+" ; " +outPutObjectPath+" "+testLine+"; gcov-11 "+cFilePath+" -m -j -b 2>&1 | tee "+tcasFolderPath+"/output.txt"
-        process=subprocess.call(command,shell=True)
+        process=subprocess.call(command,shell=False)
         coverageLines=[]
 
         with open(tcasFolderPath+"/output.txt", "r") as f:
@@ -227,7 +227,7 @@ def additionalStatementCoverage(testLines,cFilePath,outPutObjectPath,tcasFolderP
         print (cFilePath)
         print (tcasFolderPath)
         command="cd "+tcasFolderPath+" ; " +outPutObjectPath+" "+testLine+"; gcov-11 "+cFilePath+" -m -j -b 2>&1 | tee "+tcasFolderPath+"/output.txt"
-        process=subprocess.call(command,shell=True)
+        process=subprocess.call(command,shell=False)
         coverageLines=[]
 
         tcasJsonZip = os.path.join(tcasFolderPath, processName+".gcov.json.gz")
@@ -254,7 +254,7 @@ def additionalStatementCoverage(testLines,cFilePath,outPutObjectPath,tcasFolderP
         #delete the gcda path in each iteration
         gcdapath=os.path.join(tcasFolderPath, processName+".gcda")
         command = "rm " + gcdapath + " " + tcasJsonZip + " " + tcasJsonFile
-        process = subprocess.Popen(command, shell=True)
+        process = subprocess.Popen(command, shell=False)
         process.wait()
 
     #sorting the key value in desc
@@ -315,7 +315,7 @@ def additionalBranchCoverage(testLines,cFilePath,outPutObjectPath,tcasFolderPath
         print (cFilePath)
         print (tcasFolderPath)
         command="cd "+tcasFolderPath+" ; " +outPutObjectPath+" "+testLine+"; gcov-11 "+cFilePath+" -m -j -b 2>&1 | tee "+tcasFolderPath+"/output.txt"
-        process=subprocess.call(command,shell=True)
+        process=subprocess.call(command,shell=False)
         coverageLines=[]
 
         tcasJsonZip = os.path.join(tcasFolderPath, processName+".gcov.json.gz")
@@ -347,7 +347,7 @@ def additionalBranchCoverage(testLines,cFilePath,outPutObjectPath,tcasFolderPath
         #delete the gcda path in each iteration
         gcdapath=os.path.join(tcasFolderPath, processName+".gcda")
         command = "rm " + gcdapath + " " + tcasJsonZip + " " + tcasJsonFile
-        process = subprocess.Popen(command, shell=True)
+        process = subprocess.Popen(command, shell=False)
         process.wait()
 
     #sorting the key value in desc
@@ -392,7 +392,7 @@ def tcasProcess(dir):
     cFilePath=os.path.join(tcasFolderPath,'tcas.c')
     outPutObjectPath=os.path.join(tcasFolderPath,'tcas')
     command="gcc-11 --coverage -Wno-return-type -g -o "+outPutObjectPath+" "+cFilePath+";"
-    process=subprocess.Popen(command,shell=True)
+    process=subprocess.Popen(command,shell=False)
     process.wait()
     testFilePath=os.path.join(tcasFolderPath,'universe.txt')
     lines=[]
@@ -402,12 +402,12 @@ def tcasProcess(dir):
     randomStatementCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath)
     gcdapath=os.path.join(tcasFolderPath, "tcas.gcda")
     command = "rm " + gcdapath
-    process = subprocess.Popen(command, shell=True)
+    process = subprocess.Popen(command, shell=False)
     process.wait()
     totalStatementCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath, 'tcas')
     gcdapath=os.path.join(tcasFolderPath, "tcas.gcda")
     command = "rm " + gcdapath
-    process = subprocess.Popen(command, shell=True)
+    process = subprocess.Popen(command, shell=False)
     process.wait()
     additionalStatementCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath, 'tcas')
     print("done with statement coverage")
@@ -418,12 +418,12 @@ def tcasProcess(dir):
     randomBranchCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath)
     gcdapath=os.path.join(tcasFolderPath, "tcas.gcda")
     command = "rm " + gcdapath
-    process = subprocess.Popen(command, shell=True)
+    process = subprocess.Popen(command, shell=False)
     process.wait()
     totalBranchCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath, 'tcas')
     gcdapath=os.path.join(tcasFolderPath, "tcas.gcda")
     command = "rm " + gcdapath
-    process = subprocess.Popen(command, shell=True)
+    process = subprocess.Popen(command, shell=False)
     process.wait()
     additionalBranchCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath, 'tcas')
 
@@ -435,7 +435,7 @@ def totinfoProcess(dir):
     cFilePath=os.path.join(tcasFolderPath,'totinfo.c')
     outPutObjectPath=os.path.join(tcasFolderPath,'totinfo')
     command="gcc-11 --coverage -Wno-return-type -g -o "+outPutObjectPath+" "+cFilePath+" -lm ;"
-    process=subprocess.Popen(command,shell=True)
+    process=subprocess.Popen(command,shell=False)
     process.wait()
     testFilePath=os.path.join(tcasFolderPath,'universe.txt')
     lines=[]
@@ -447,13 +447,13 @@ def totinfoProcess(dir):
     ##deleting gcda file code her
     gcdapath=os.path.join(tcasFolderPath, "totinfo.gcda")
     command = "rm " + gcdapath
-    process = subprocess.Popen(command, shell=True)
+    process = subprocess.Popen(command, shell=False)
     process.wait()
 
     totalStatementCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath,'totinfo')
     gcdapath=os.path.join(tcasFolderPath, "totinfo.gcda")
     command = "rm " + gcdapath
-    process = subprocess.Popen(command, shell=True)
+    process = subprocess.Popen(command, shell=False)
     process.wait()
     additionalStatementCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath,'totinfo')
 
@@ -461,13 +461,13 @@ def totinfoProcess(dir):
     ##deleting gcda file code her
     gcdapath=os.path.join(tcasFolderPath, "totinfo.gcda")
     command = "rm " + gcdapath
-    process = subprocess.Popen(command, shell=True)
+    process = subprocess.Popen(command, shell=False)
     process.wait()
 
     totalBranchCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath,'totinfo')
     gcdapath=os.path.join(tcasFolderPath, "totinfo.gcda")
     command = "rm " + gcdapath
-    process = subprocess.Popen(command, shell=True)
+    process = subprocess.Popen(command, shell=False)
     process.wait()
     additionalBranchCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath,'totinfo')
 
@@ -480,7 +480,7 @@ def scheduleProcess(dir):
         cFilePath=os.path.join(tcasFolderPath,'schedule.c')
         outPutObjectPath=os.path.join(tcasFolderPath,'schedule')
         command="gcc-11 --coverage -Wno-return-type -g -o "+outPutObjectPath+" "+cFilePath+";"
-        process=subprocess.Popen(command,shell=True)
+        process=subprocess.Popen(command,shell=False)
         process.wait()
         testFilePath=os.path.join(tcasFolderPath,'universe.txt')
         lines=[]
@@ -492,24 +492,24 @@ def scheduleProcess(dir):
         ##deleting gcda file code her
         gcdapath=os.path.join(tcasFolderPath, "schedule.gcda")
         command = "rm " + gcdapath
-        process = subprocess.Popen(command, shell=True)
+        process = subprocess.Popen(command, shell=False)
         process.wait()
         totalStatementCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath, 'schedule')
         gcdapath=os.path.join(tcasFolderPath, "schedule.gcda")
         command = "rm " + gcdapath
-        process = subprocess.Popen(command, shell=True)
+        process = subprocess.Popen(command, shell=False)
         process.wait()
         additionalStatementCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath, 'schedule')
         randomBranchCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath)
         ##deleting gcda file code her
         gcdapath=os.path.join(tcasFolderPath, "schedule.gcda")
         command = "rm " + gcdapath
-        process = subprocess.Popen(command, shell=True)
+        process = subprocess.Popen(command, shell=False)
         process.wait()
         totalBranchCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath, 'schedule')
         gcdapath=os.path.join(tcasFolderPath, "schedule.gcda")
         command = "rm " + gcdapath
-        process = subprocess.Popen(command, shell=True)
+        process = subprocess.Popen(command, shell=False)
         process.wait()
         additionalBranchCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath, 'schedule')
 
@@ -518,7 +518,7 @@ def schedule2Process(dir):
     cFilePath=os.path.join(tcasFolderPath,'schedule2.c')
     outPutObjectPath=os.path.join(tcasFolderPath,'schedule2')
     command="gcc-11 --coverage -Wno-return-type -g -o "+outPutObjectPath+" "+cFilePath+";"
-    process=subprocess.Popen(command,shell=True)
+    process=subprocess.Popen(command,shell=False)
     process.wait()
     testFilePath=os.path.join(tcasFolderPath,'universe.txt')
     lines=[]
@@ -530,13 +530,13 @@ def schedule2Process(dir):
     ##deleting gcda file code her
     gcdapath=os.path.join(tcasFolderPath, "schedule2.gcda")
     command = "rm " + gcdapath
-    process = subprocess.Popen(command, shell=True)
+    process = subprocess.Popen(command, shell=False)
     process.wait()
 
     totalStatementCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath, 'schedule2')
     gcdapath=os.path.join(tcasFolderPath, "schedule2.gcda")
     command = "rm " + gcdapath
-    process = subprocess.Popen(command, shell=True)
+    process = subprocess.Popen(command, shell=False)
     process.wait()
     additionalStatementCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath, 'schedule2')
 
@@ -544,12 +544,12 @@ def schedule2Process(dir):
     ##deleting gcda file code her
     gcdapath=os.path.join(tcasFolderPath, "schedule2.gcda")
     command = "rm " + gcdapath
-    process = subprocess.Popen(command, shell=True)
+    process = subprocess.Popen(command, shell=False)
     process.wait()
     totalBranchCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath, 'schedule2')
     gcdapath=os.path.join(tcasFolderPath, "schedule2.gcda")
     command = "rm " + gcdapath
-    process = subprocess.Popen(command, shell=True)
+    process = subprocess.Popen(command, shell=False)
     process.wait()
     additionalBranchCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath, 'schedule2')
 
@@ -558,7 +558,7 @@ def printtokensProcess(dir):
     cFilePath=os.path.join(tcasFolderPath,'printtokens.c')
     outPutObjectPath=os.path.join(tcasFolderPath,'printtokens')
     command="gcc-11 --coverage -Wno-return-type -g -o "+outPutObjectPath+" "+cFilePath+";"
-    process=subprocess.Popen(command,shell=True)
+    process=subprocess.Popen(command,shell=False)
     process.wait()
     testFilePath=os.path.join(tcasFolderPath,'universe.txt')
     lines=[]
@@ -570,24 +570,24 @@ def printtokensProcess(dir):
     ##deleting gcda file code her
     gcdapath=os.path.join(tcasFolderPath, "printtokens.gcda")
     command = "rm " + gcdapath
-    process = subprocess.Popen(command, shell=True)
+    process = subprocess.Popen(command, shell=False)
     process.wait()
     totalStatementCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath, 'printtokens')
     gcdapath=os.path.join(tcasFolderPath, "printtokens.gcda")
     command = "rm " + gcdapath
-    process = subprocess.Popen(command, shell=True)
+    process = subprocess.Popen(command, shell=False)
     process.wait()
     additionalStatementCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath, 'printtokens')
     randomBranchCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath)
     ##deleting gcda file code her
     gcdapath=os.path.join(tcasFolderPath, "printtokens.gcda")
     command = "rm " + gcdapath
-    process = subprocess.Popen(command, shell=True)
+    process = subprocess.Popen(command, shell=False)
     process.wait()
     totalBranchCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath, 'printtokens')
     gcdapath=os.path.join(tcasFolderPath, "printtokens.gcda")
     command = "rm " + gcdapath
-    process = subprocess.Popen(command, shell=True)
+    process = subprocess.Popen(command, shell=False)
     process.wait()
     additionalBranchCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath, 'printtokens')
 
@@ -597,7 +597,7 @@ def printtokens2Process(dir):
     cFilePath=os.path.join(tcasFolderPath,'printtokens2.c')
     outPutObjectPath=os.path.join(tcasFolderPath,'printtokens2')
     command="gcc-11 --coverage -Wno-return-type -g -o "+outPutObjectPath+" "+cFilePath+";"
-    process=subprocess.Popen(command,shell=True)
+    process=subprocess.Popen(command,shell=False)
     process.wait()
     testFilePath=os.path.join(tcasFolderPath,'universe.txt')
     lines=[]
@@ -609,24 +609,24 @@ def printtokens2Process(dir):
     ##deleting gcda file code her
     gcdapath=os.path.join(tcasFolderPath, "printtokens2.gcda")
     command = "rm " + gcdapath
-    process = subprocess.Popen(command, shell=True)
+    process = subprocess.Popen(command, shell=False)
     process.wait()
     totalStatementCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath, 'printtokens2')
     gcdapath=os.path.join(tcasFolderPath, "printtokens2.gcda")
     command = "rm " + gcdapath
-    process = subprocess.Popen(command, shell=True)
+    process = subprocess.Popen(command, shell=False)
     process.wait()
     additionalStatementCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath, 'printtokens2')
     randomBranchCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath)
     ##deleting gcda file code her
     gcdapath=os.path.join(tcasFolderPath, "printtokens2.gcda")
     command = "rm " + gcdapath
-    process = subprocess.Popen(command, shell=True)
+    process = subprocess.Popen(command, shell=False)
     process.wait()
     totalBranchCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath, 'printtokens2')
     gcdapath=os.path.join(tcasFolderPath, "printtokens2.gcda")
     command = "rm " + gcdapath
-    process = subprocess.Popen(command, shell=True)
+    process = subprocess.Popen(command, shell=False)
     process.wait()
     additionalBranchCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath, 'printtokens2')
 
@@ -636,7 +636,7 @@ def replaceProcess(dir):
     cFilePath=os.path.join(tcasFolderPath,'replace.c')
     outPutObjectPath=os.path.join(tcasFolderPath,'replace')
     command="gcc-11 --coverage -Wno-return-type -g -o "+outPutObjectPath+" "+cFilePath+" -lm ;"
-    process=subprocess.Popen(command,shell=True)
+    process=subprocess.Popen(command,shell=False)
     process.wait()
     testFilePath=os.path.join(tcasFolderPath,'universe.txt')
     lines=[]
@@ -648,12 +648,12 @@ def replaceProcess(dir):
     ##deleting gcda file code her
     gcdapath=os.path.join(tcasFolderPath, "replace.gcda")
     command = "rm " + gcdapath
-    process = subprocess.Popen(command, shell=True)
+    process = subprocess.Popen(command, shell=False)
     process.wait()
     totalStatementCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath, 'replace')
     gcdapath=os.path.join(tcasFolderPath, "replace.gcda")
     command = "rm " + gcdapath
-    process = subprocess.Popen(command, shell=True)
+    process = subprocess.Popen(command, shell=False)
     process.wait()
     additionalStatementCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath, 'replace')
 
@@ -661,12 +661,12 @@ def replaceProcess(dir):
     ##deleting gcda file code her
     gcdapath=os.path.join(tcasFolderPath, "replace.gcda")
     command = "rm " + gcdapath
-    process = subprocess.Popen(command, shell=True)
+    process = subprocess.Popen(command, shell=False)
     process.wait()
     totalBranchCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath, 'replace')
     gcdapath=os.path.join(tcasFolderPath, "replace.gcda")
     command = "rm " + gcdapath
-    process = subprocess.Popen(command, shell=True)
+    process = subprocess.Popen(command, shell=False)
     process.wait()
     additionalBranchCoverage(lines,cFilePath,outPutObjectPath,tcasFolderPath, 'replace')
 
