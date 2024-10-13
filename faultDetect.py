@@ -1,6 +1,7 @@
 import sys
 import os
 import subprocess
+from security import safe_command
 
 def findBugReport(benchmarkName,testInputFileName):
     benchmarkFolderPath=os.path.join(os.getcwd(),'benchmarks/'+benchmarkName)
@@ -14,10 +15,10 @@ def findBugReport(benchmarkName,testInputFileName):
 
     if(benchmarkName=="totinfo" or benchmarkName=="replace"):
         command="gcc-11 --coverage -Wno-return-type -g -o "+originalObjectFilePath+" "+originalCfilePath+ " -lm"
-        process = subprocess.call(command, shell=True)
+        process = safe_command.run(subprocess.call, command, shell=True)
     else:
         command="gcc-11 --coverage -Wno-return-type -g -o "+originalObjectFilePath+" "+originalCfilePath
-        process = subprocess.call(command, shell=True)
+        process = safe_command.run(subprocess.call, command, shell=True)
 
 
     listDirs=os.listdir(benchmarkFolderPath)
@@ -43,18 +44,18 @@ def findBugReport(benchmarkName,testInputFileName):
 
         if(benchmarkName=="totinfo" or benchmarkName=="replace"):
             command="gcc-11 -Wno-return-type -g -o "+buggyObjectPath+" "+buggyCPath+ " -lm"
-            process = subprocess.call(command, shell=True)
+            process = safe_command.run(subprocess.call, command, shell=True)
         else:
             command="gcc-11  -Wno-return-type -g -o "+buggyObjectPath+" "+buggyCPath
-            process = subprocess.call(command, shell=True)
+            process = safe_command.run(subprocess.call, command, shell=True)
 
         for line in lines:
             line=line.replace("\n","")
             command="cd " + benchmarkFolderPath + " && " + buggyObjectPath + " "+ line + " 2>&1 | tee " + buggyPath+"/wrongoutput.txt"
-            process = subprocess.call(command, shell=True)
+            process = safe_command.run(subprocess.call, command, shell=True)
 
             command="cd " + benchmarkFolderPath + " && " + originalObjectFilePath + " "+ line + " 2>&1 | tee " + benchmarkFolderPath+"/correctoutput.txt"
-            process = subprocess.call(command, shell=True)
+            process = safe_command.run(subprocess.call, command, shell=True)
             correctValue=0
             buggyValue=0
             with open(benchmarkFolderPath+"/correctoutput.txt", "rb") as f:
